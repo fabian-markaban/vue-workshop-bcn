@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "dependencies": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "@vue/cli": "^3.0.0-rc.5"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
