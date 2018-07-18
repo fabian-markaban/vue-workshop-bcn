@@ -10,7 +10,7 @@ services:
      - ~/.cache/bower/:/home/user/.cache/bower
 
   cli:
-    image: node:6
+    image: node:8
     entrypoint: bash
     working_dir: /src
     volumes_from:
