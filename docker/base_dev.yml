@@ -1,0 +1,25 @@
+version: '2'
+
+services:
+
+  data:
+    image: busybox
+    volumes:
+     - ../:/opt/webapp
+     - ~/.cache/yarn/:/home/user/.cache/yarn
+     - ~/.cache/bower/:/home/user/.cache/bower
+
+  cli:
+    image: node:6
+    volumes_from:
+      - data
+    working_dir: /opt/webapp
+
+  web_dev:
+    entrypoint: "npm install && npm run dev"
+    image: vue-cli
+    ports:
+      - 8080:8080
+    volumes_from:
+      - data
+    working_dir: /opt/webapp

@@ -1,0 +1,31 @@
+plugins {
+  id 'nl.dpes.gradle_plugin' version '1.1.4'
+  id 'jp.classmethod.aws.s3' version '0.35'
+  id 'idea'
+}
+
+import jp.classmethod.aws.gradle.s3.SyncTask
+import groovy.json.JsonSlurper
+
+
+task buildCliImage(type: nl.dpes.base.tasks.docker_compose.UpTask) {
+  description = 'Run the project in dev mode'
+  group = 'Run'
+
+  service 'cli'
+}
+
+task installNpm(type: nl.dpes.base.tasks.docker_compose.RunTask, dependsOn: ['buildCliImage']) {
+  service 'cli'
+  entryPoint 'npm'
+  command 'install'
+}
+
+task run(type: nl.dpes.base.tasks.docker_compose.UpTask, dependsOn: ['buildCliImage']) {
+  description = 'Run the project in dev mode'
+  group = 'Run'
+
+  service 'web_dev'
+}
+
+
