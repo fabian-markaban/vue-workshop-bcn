@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My first Vue app</title>
+    <script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+    <script src="db.js"></script>
+</head>
+<body>
+<div id="app">
+    {{ message }}
+    <ul>
+        <contact-card v-for="contact in contacts.slice(145,155)" v-bind:contact="contact"></contact-card>
+    </ul>
+</div>
+
+<script>
+    Vue.component('contact-card', {
+        props: ['contact'],
+        template: `
+            <li>
+                <span>{{ contact.firstName }}</span>
+                <span>, {{ contact.lastName }}</span>
+                <span v-if="contact.gender">, {{ contact.gender}}</span>
+                <img v-bind:src="contact.avatar">
+                <input type="checkbox" v-model="contact.isFavorite">
+            </li>
+            `
+
+    });
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!',
+            contacts: db.contacts
+        }
+    })
+</script>
+</body>
+</html>
