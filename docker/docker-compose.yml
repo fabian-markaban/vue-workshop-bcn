@@ -18,7 +18,7 @@ services:
 
   web_dev:
     command: "bash -c 'yarn install && yarn serve'"
-    image: node:6
+    image: node:8
     ports:
       - 8080:8080
     volumes_from:
