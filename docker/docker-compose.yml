@@ -5,21 +5,22 @@ services:
   data:
     image: busybox
     volumes:
-     - ../:/opt/webapp
+     - ../:/src
      - ~/.cache/yarn/:/home/user/.cache/yarn
      - ~/.cache/bower/:/home/user/.cache/bower
 
   cli:
     image: node:6
+    entrypoint: bash
+    working_dir: /src
     volumes_from:
       - data
-    working_dir: /opt/webapp
 
   web_dev:
-    entrypoint: "npm install && npm run dev"
-    image: vue-cli
+    command: "bash -c 'npm install && npm run dev'"
+    image: node:6
     ports:
       - 8080:8080
     volumes_from:
       - data
-    working_dir: /opt/webapp
+    working_dir: /src
