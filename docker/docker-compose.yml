@@ -17,7 +17,7 @@ services:
       - data
 
   web_dev:
-    command: "bash -c 'npm install && npm run dev'"
+    command: "bash -c 'yarn install && yarn serve'"
     image: node:6
     ports:
       - 8080:8080
